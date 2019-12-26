@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using NLog.Extensions.Logging;
+using Server.Entities;
 
 namespace Server {
 
@@ -12,7 +11,9 @@ namespace Server {
 		public void ConfigureServices(IServiceCollection services) {
 
 			services.AddMvc();
-			services.AddSingleton<ICustomerRepository, CustomerRepository>();
+			services.AddTransient<ICustomerRepository, CustomerRepository>();
+			services.AddDbContext<BookstoreContext>(options => options.UseSqlServer("Server=localhost;Database=bookstore;Trusted_Connection=True;MultipleActiveResultSets=True;"));
+			services.AddTransient<Seed>();
 
 		}
 
@@ -20,6 +21,11 @@ namespace Server {
 
 			if (env.IsDevelopment()) {
 				app.UseDeveloperExceptionPage();
+			}
+
+			using (var scope = app.ApplicationServices.CreateScope()){
+				var seed = scope.ServiceProvider.GetRequiredService<Seed>();
+				seed.Run();
 			}
 
 			app.UseMvc();

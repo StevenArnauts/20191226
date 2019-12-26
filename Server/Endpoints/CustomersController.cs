@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Server.Entities;
+using Customer = Server.Entities.Customer;
 
-namespace Server {
+namespace Server.Endpoints {
 
 	[Route("customers")]
 	public class CustomersController: ControllerBase {

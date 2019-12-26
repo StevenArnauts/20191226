@@ -1,24 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Server {
+namespace Server.Entities {
 
 	public class CustomerRepository : ICustomerRepository {
 
-		private readonly List<Customer> _customers = new List<Customer> {
-			new Customer {Id = Guid.NewGuid(), Name = "Banden Janssens" },
-			new Customer {Id = Guid.NewGuid(), Name = "Bakkerij Van Kampen" }
-		};
+		private readonly BookstoreContext _context;
+
+		public CustomerRepository(BookstoreContext context) {
+			this._context = context;
+		}
 
 		public IEnumerable<Customer> Entities {
 			get {
-				return _customers.AsReadOnly();
+				return this._context.Customers;
 			}
 		}
 
 		public Customer Add(string name) {
 			Customer entity = new Customer { Id = Guid.NewGuid(), Name = name };
-			_customers.Add(entity);
+			this._context.Customers.Add(entity);
+			this._context.SaveChanges();
 			return entity;
 		}
 
