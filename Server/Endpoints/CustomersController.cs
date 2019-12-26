@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Server.Entities;
-using Customer = Server.Entities.Customer;
+using Server.Domain;
 
 namespace Server.Endpoints {
 

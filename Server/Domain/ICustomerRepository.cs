@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Server.Entities {
+namespace Server.Domain {
 
 	public interface ICustomerRepository {
 
