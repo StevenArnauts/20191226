@@ -1,3 +1,5 @@
+- add unit tests
 - add unit of work (filter)
 - remove domain layer
-- 
+- cqrs
+- delegates, events, lambda's (see Jels' example)

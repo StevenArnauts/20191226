@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Server.Domain;
 using Server.Entities;
+using Server.Entities.UnitOfWork;
 
 namespace Server {
 
@@ -11,10 +13,14 @@ namespace Server {
 
 		public void ConfigureServices(IServiceCollection services) {
 
-			services.AddMvc();
+			services.AddMvc(options => {
+				options.Filters.Add<UnitOfWorkFilter<BookstoreContext>>();
+			});
 			services.AddTransient<ICustomerRepository, CustomerRepository>();
+			services.AddTransient<IOrderRepository, OrderRepository>();
 			services.AddDbContext<BookstoreContext>(options => options.UseSqlServer("Server=localhost;Database=bookstore;Trusted_Connection=True;MultipleActiveResultSets=True;"));
 			services.AddTransient<Seed>();
+			services.AddAutoMapper(typeof(Startup));
 
 		}
 

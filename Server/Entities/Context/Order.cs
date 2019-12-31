@@ -11,6 +11,10 @@ namespace Server.Entities {
 
 		public DateTime Date { get; set; }
 		public string Description { get; set; }
+		public DateTime? Paid { get; set; }
+		public DateTime? Sent { get; set; }
+
+		public Guid CustomerId { get; set; }
 		public Customer Customer { get; set; }
 
 		public ICollection<Line> Lines { get; set; }

@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
 
 namespace Server.Domain {
 
 	public interface ICustomerRepository {
-
-		IEnumerable<Customer> Entities { get; }
 
 		/// <summary>
 		/// Adds a new customer with the specified <paramref name="name"/> to the persistent store and saves changes.
@@ -12,6 +10,8 @@ namespace Server.Domain {
 		/// <param name="name"></param>
 		/// <returns></returns>
 		Customer Add(string name);
+
+		Customer Get(Guid id);
 
 	}
 
