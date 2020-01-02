@@ -1,5 +1,10 @@
 - add unit tests
-- add unit of work (filter)
-- remove domain layer
-- cqrs
+- add unit of work (filter) => done
+- remove domain layer => not done
+- cqrs => done
 - delegates, events, lambda's (see Jels' example)
+
+
+Ok agenda
+
+- 

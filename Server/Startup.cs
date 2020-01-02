@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Server.Domain;
 using Server.Entities;
-using Server.Entities.UnitOfWork;
+using Server.Utilities.Filters;
 
 namespace Server {
 

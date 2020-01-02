@@ -6,7 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Server.Domain;
 using Server.Entities;
-using Server.Utilities;
+using Server.Utilities.Extensions;
 using Customer = Server.Domain.Customer;
 using Order = Server.Domain.Order;
 

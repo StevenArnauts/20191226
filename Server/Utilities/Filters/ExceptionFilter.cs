@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Server.Entities;
 using Server.Utilities.Exceptions;
 
-namespace Server.Entities.UnitOfWork {
+namespace Server.Utilities.Filters {
 
 	public class ExceptionFilter : IActionFilter {
 

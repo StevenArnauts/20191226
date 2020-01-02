@@ -1,4 +1,4 @@
-﻿namespace Server.Entities.UnitOfWork {
+﻿namespace Server.Utilities.Filters {
 
 	public class ErrorResult {
 

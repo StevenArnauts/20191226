@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace Server.Entities.UnitOfWork {
+namespace Server.Utilities.Filters {
 
 	public class UnitOfWorkFilter<TContext> : IActionFilter where TContext : DbContext {
 

@@ -2,7 +2,8 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Server.Entities.UnitOfWork {
+namespace Server.Utilities {
+
 	public class Hasher {
 
 		private const string NUMBERS = "0123456789";
