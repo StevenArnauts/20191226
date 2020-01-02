@@ -21,6 +21,7 @@ namespace Server.Domain {
 		public Customer Add(string name) {
 			CustomerEntity entity = new CustomerEntity { Name = name };
 			this._context.Customers.Add(entity);
+			this._context.SaveChanges();
 			return new Customer(entity);
 		}
 

@@ -34,7 +34,7 @@ namespace Server.Endpoints {
 		[Route("")]
 		public OrderDetailRepresentation AddOrder(Guid customerId, [FromBody] OrderSpecification spec) {
 			var customer = this._customers.Get(customerId);
-			var command = new CreateOrderCommand(this._orders);
+			var command = new CreateOrderService(this._orders);
 			var order = command.Execute(spec.Description, spec.Date, customer);
 			foreach(var line in spec.Lines)	{
 				order.AddLine(line.Amount, line.Product);

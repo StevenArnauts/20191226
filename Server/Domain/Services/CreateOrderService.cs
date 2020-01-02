@@ -3,14 +3,13 @@
 namespace Server.Domain {
 
 	/// <summary>
-	/// Or "service"? (in order not to have to create an explicit command for everything
 	/// I only wanted to encapsulate the two lines creating the order and adding it to the customer in one re-usable "place"
 	/// </summary>
-	public class CreateOrderCommand {
+	public class CreateOrderService {
 
 		private readonly IOrderRepository _orders;
 
-		public CreateOrderCommand(IOrderRepository orders) {
+		public CreateOrderService(IOrderRepository orders) {
 			this._orders = orders;
 		}
 
