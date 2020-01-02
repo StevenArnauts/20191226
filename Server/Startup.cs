@@ -14,6 +14,7 @@ namespace Server {
 		public void ConfigureServices(IServiceCollection services) {
 
 			services.AddMvc(options => {
+				options.Filters.Add<ExceptionFilter>();
 				options.Filters.Add<UnitOfWorkFilter<BookstoreContext>>();
 			});
 			services.AddTransient<ICustomerRepository, CustomerRepository>();

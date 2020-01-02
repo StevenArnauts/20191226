@@ -40,7 +40,7 @@ namespace Server.Endpoints {
 		[Route("{id:guid}")]
 		[HttpGet]
 		public CustomerDetailRepresentation Get(Guid id) {
-			var entity = this._context.Customers.Include(c => c.Orders).ThenInclude(o => o.Lines).FirstOrDefault(c => c.Id == id);
+			var entity = this._context.Customers.Include(c => c.Orders).ThenInclude(o => o.Lines).Get(c => c.Id == id);
 			return this._mapper.Map<CustomerDetailRepresentation>(entity);
 		}
 
