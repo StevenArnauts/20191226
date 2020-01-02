@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Transactions;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Server.Domain;
 using Server.Entities;
 using Server.Utilities;
+using Customer = Server.Domain.Customer;
+using Order = Server.Domain.Order;
 
 namespace Server.Endpoints {
 
@@ -33,13 +36,26 @@ namespace Server.Endpoints {
 		[HttpPost]
 		[Route("")]
 		public OrderDetailRepresentation AddOrder(Guid customerId, [FromBody] OrderSpecification spec) {
-			var customer = this._customers.Get(customerId);
-			var command = new CreateOrderService(this._orders);
-			var order = command.Execute(spec.Description, spec.Date, customer);
-			foreach(var line in spec.Lines)	{
-				order.AddLine(line.Amount, line.Product);
+
+			Guid orderId;
+
+			using (var scope = new TransactionScope()) {
+
+				// do shit
+				Customer customer = this._customers.Get(customerId);
+				CreateOrderService command = new CreateOrderService(this._orders);
+				Order order = command.Execute(spec.Description, spec.Date, customer);
+				foreach (var line in spec.Lines) {
+					order.AddLine(line.Amount, line.Product);
+				}
+				orderId = order.Id;
+
+				// commit
+				scope.Complete();
 			}
-			return this._mapper.Map<OrderDetailRepresentation>(this._context.Orders.Local.Get(o => o.Id == order.Id));	
+
+			return this._mapper.Map<OrderDetailRepresentation>(this._context.Orders.Local.Get(o => o.Id == orderId));
+
 		}
 
 	}
